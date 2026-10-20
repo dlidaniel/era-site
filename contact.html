@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact Era</title>
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{ --ink:#141414; --mute:#6B6B68; --line:#E7E7E5; --edge:#CFCFCC; --soft:#F6F6F4; --amber:#E39A2D; --bg:#FFFFFF;
+  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif; color-scheme:light }
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{margin:0;font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+a{color:var(--ink);text-decoration-thickness:1px;text-underline-offset:3px}
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px}
+.logo{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none}
+.logo .mark{width:27px;height:27px;flex:none}
+.logo span{font-weight:600;font-size:26px;line-height:1;letter-spacing:-.04em}
+.top nav{display:flex;align-items:center;gap:26px;font-size:15px}
+.top nav a:not(.btn){color:var(--ink);text-decoration:none}
+.top nav a:not(.btn):hover,.top nav a[aria-current="page"]:not(.btn){text-decoration:underline}
+main.wrap{padding-block:56px 72px}
+h1{font-weight:650;font-size:44px;line-height:1.1;letter-spacing:-.03em;margin:0 0 16px;text-wrap:balance}
+h2{font-weight:650;font-size:17px;line-height:1.3;margin:0}
+p{margin:0 0 14px;max-width:62ch}
+.mute{color:var(--mute)}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 12px}
+.btn{appearance:none;display:inline-block;font:inherit;font-size:15px;font-weight:600;line-height:1.3;color:var(--bg);background:var(--ink);border:1px solid var(--ink);border-radius:8px;padding:10px 20px;cursor:pointer;text-decoration:none}
+.btn:hover{background:#000}
+footer .foot{padding-block:22px 40px;border-top:1px solid var(--line);color:var(--mute);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:640px){ h1{font-size:34px} .top nav{gap:16px} .top nav .btn{padding:8px 14px;font-size:14px} main.wrap{padding-block:40px 56px} }
+
+.cur-dot,.cur-ring{position:fixed;left:0;top:0;z-index:2147483647;pointer-events:none;opacity:0;transition:opacity .2s;will-change:transform}
+.cur-on .cur-dot,.cur-on .cur-ring{opacity:1}
+.cur-dot i,.cur-ring i{position:absolute;left:0;top:0;border-radius:50%;transform:translate(-50%,-50%)}
+.cur-dot i{width:6px;height:6px;background:var(--ink);transition:background-color .2s}
+.cur-ring i{width:34px;height:34px;border:1.5px solid rgba(20,20,20,.5);transition:width .3s cubic-bezier(.2,.7,.2,1),height .3s cubic-bezier(.2,.7,.2,1),border-color .2s,background-color .2s}
+.cur-link .cur-ring i{width:54px;height:54px;border-color:var(--amber);background:rgba(227,154,45,.12)}
+.cur-link .cur-dot i{background:var(--amber)}
+.cur-drag .cur-ring i{width:60px;height:60px;border-style:dashed;border-color:rgba(20,20,20,.45)}
+.cur-down .cur-ring i{width:24px;height:24px}
+.cur-down.cur-link .cur-ring i,.cur-down.cur-drag .cur-ring i{width:42px;height:42px}
+.cur-dark .cur-dot i{background:#fff}
+.cur-dark .cur-ring i{border-color:rgba(255,255,255,.7)}
+.cur-text .cur-dot,.cur-text .cur-ring{opacity:0}
+.cur-on,.cur-on *{cursor:none!important}
+.cur-on textarea,.cur-on input,.cur-on [contenteditable]{cursor:text!important}
+@media (forced-colors:active){ .cur-dot,.cur-ring{display:none} }
+
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:40px 56px;align-items:start}
+.mail{display:grid;gap:8px;max-width:540px;margin-top:26px}
+.mail label{font-size:13px;color:var(--mute)}
+.mail textarea{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--edge);border-radius:8px;padding:10px 12px;resize:vertical;min-height:150px;width:100%}
+.mail textarea:focus{border-color:var(--ink)}
+.mail .row{margin-top:6px}
+.note{font-size:13px;color:var(--mute);min-height:1.5em;margin:4px 0 0}
+.lines p{margin:0}
+.beta{background:var(--soft);border-radius:18px;padding:32px 32px 0;display:grid;grid-template-columns:1fr 150px;gap:8px 20px;overflow:hidden;align-items:end}
+.beta .copy{padding-bottom:32px;align-self:start}
+.beta .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:12px}
+.beta .pill i{width:7px;height:7px;border-radius:50%;background:var(--amber)}
+.beta h2{font-size:24px;line-height:1.2;letter-spacing:-.02em;margin-bottom:10px;text-wrap:balance}
+.beta p{color:#3C3C3A;margin-bottom:18px}
+.beta .phone{width:150px;height:auto;margin-bottom:-70px}
+@media (max-width:860px){ .contact{grid-template-columns:1fr} }
+@media (max-width:420px){ .beta{grid-template-columns:1fr;padding:26px 22px 0} .beta .phone{justify-self:center;width:160px} }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><a class="logo" href="index.html" aria-label="Era home"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="14.5" cy="14.5" r="10.2" fill="none" stroke="currentColor" stroke-width="3.4"/><circle cx="23.6" cy="23.6" r="4.8" fill="#E39A2D" stroke="#fff" stroke-width="1.6"/></svg><span>Era</span></a><nav><a href="prototypes.html">Prototypes</a><a class="btn" href="contact.html" aria-current="page">Contact us</a></nav></div></header>
+<main class="wrap">
+  <div class="contact">
+    <div>
+      <h1 id="title">Contact us</h1>
+      <div class="lines"><p id="line">Ask us anything or get a quote</p><p class="mute">We read every email</p></div>
+      <form class="mail" id="mail" novalidate>
+        <label for="msg">Message</label>
+        <textarea id="msg" name="msg" rows="6"></textarea>
+        <div class="row"><button class="btn" type="submit">Send email</button></div>
+        <p class="note" id="note" aria-live="polite"></p>
+      </form>
+    </div>
+    <section class="beta" aria-labelledby="beta-h">
+      <div class="copy">
+        <span class="pill"><i aria-hidden="true"></i>Private iOS beta</span>
+        <h2 id="beta-h">The Era app is in private beta on iPhone</h2>
+        <p>Families can ask for an invite to try it</p>
+        <button class="btn" type="button" id="invite">Request an invite</button>
+      </div>
+      <svg class="art phone" viewBox="0 0 240 430" role="img" aria-labelledby="app-t">
+<title id="app-t">The Era app on an iPhone showing the stove and two pill bottles</title>
+<g font-family="inherit">
+  <rect x="18" y="8" width="204" height="414" rx="36" fill="#fff" stroke="#141414" stroke-width="1.6"/>
+  <rect x="27" y="17" width="186" height="396" rx="28" fill="none" stroke="#DCDCD8" stroke-width="1.4"/>
+  <rect x="95" y="29" width="50" height="13" rx="6.5" fill="#141414"/>
+  <text x="38" y="88" font-size="24" font-weight="700" fill="#141414" letter-spacing="-.5">Era</text>
+  <text x="38" y="108" font-size="12" fill="#8E8E8B">Mom’s home</text>
+  <rect x="38" y="128" width="164" height="54" rx="12" fill="#F3F3F1"/>
+  <circle cx="58" cy="155" r="6" fill="#E39A2D"/>
+  <text x="74" y="152" font-size="14" font-weight="600" fill="#141414">Kitchen stove</text>
+  <text x="74" y="169" font-size="12" fill="#8E8E8B">On for 22 minutes</text>
+  <rect x="38" y="192" width="164" height="54" rx="12" fill="#F3F3F1"/>
+  <circle cx="58" cy="219" r="6" fill="#A9C7A8"/>
+  <text x="74" y="216" font-size="14" font-weight="600" fill="#141414">Morning pills</text>
+  <text x="74" y="233" font-size="12" fill="#8E8E8B">Taken at 9 am</text>
+  <rect x="38" y="256" width="164" height="54" rx="12" fill="#F3F3F1"/>
+  <circle cx="58" cy="283" r="6" fill="#C9CBC8"/>
+  <text x="74" y="280" font-size="14" font-weight="600" fill="#141414">Evening pills</text>
+  <text x="74" y="297" font-size="12" fill="#8E8E8B">Locked until 8 pm</text>
+  <rect x="38" y="344" width="164" height="40" rx="20" fill="#141414"/>
+  <text x="120" y="369" font-size="13" font-weight="600" fill="#fff" text-anchor="middle">Call Mom</text>
+</g>
+</svg>
+    </section>
+  </div>
+</main>
+<footer><div class="wrap"><div class="foot"><span>Era 2026</span><span>Daniel Li and Connor Wang</span></div></div></footer>
+<script>
+/* Send email opens the visitor's own email app with the message filled in. Nothing is sent from this page.
+   Request an invite (or arriving with #beta) fills in a beta request. */
+(function () {
+  var TO = 'moc.liamg@4514illeinad'.split('').reverse().join(''), subject = 'Hello Era', form = document.getElementById('mail'), note = document.getElementById('note');
+  function beta() {
+    subject = 'Era iOS beta';
+    document.getElementById('title').textContent = 'Join the iOS beta';
+    document.getElementById('line').textContent = 'Tell us who you care for and we will send an invite';
+    form.msg.value = 'I would like to join the Era private iOS beta';
+    form.msg.focus();
+  }
+  if (location.hash === '#beta') beta();
+  document.getElementById('invite').addEventListener('click', beta);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var msg = form.msg.value.trim();
+    if (!msg) { note.textContent = 'Write a message first'; form.msg.focus(); return; }
+    var a = document.createElement('a');
+    a.href = 'mailto:' + TO + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(msg);
+    document.body.appendChild(a); a.click(); a.remove();
+    note.textContent = 'Your email app should open with your message ready to send';
+  });
+})();
+</script>
+<script>
+/* Era cursor: a small dot right at the pointer and a ring that glides after it.
+   The ring grows and turns amber over anything you can click, grows dashed over a 3D model you can drag,
+   tightens while the button is held, and steps aside for the normal text cursor in a text box.
+   Only for a mouse or trackpad; touch screens keep their normal behaviour. */
+(function () {
+  if (!window.matchMedia || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+  if (matchMedia('(forced-colors: active)').matches) return;
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  var dot = document.createElement('div'), ring = document.createElement('div');
+  dot.className = 'cur-dot'; ring.className = 'cur-ring';
+  dot.innerHTML = ring.innerHTML = '<i></i>';
+  dot.setAttribute('aria-hidden', 'true'); ring.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(ring); document.body.appendChild(dot);
+
+  var CLICK = 'a[href], button:not([disabled]), label, summary, select, [role="button"], input[type="submit"], input[type="button"]';
+  var TEXT = 'textarea, input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]), [contenteditable="true"], [contenteditable=""]';
+  var x = 0, y = 0, rx = 0, ry = 0, raf = 0, on = false;
+
+  function place(el, px, py) { el.style.transform = 'translate3d(' + px + 'px,' + py + 'px,0)'; }
+  function mode(t) {
+    if (!t || !t.closest) return;
+    var text = t.closest(TEXT), click = !text && t.closest(CLICK);
+    root.classList.toggle('cur-text', !!text);
+    root.classList.toggle('cur-link', !!click);
+    root.classList.toggle('cur-drag', !text && !click && !!t.closest('.view'));
+    root.classList.toggle('cur-dark', !click && !!t.closest('.bar'));
+  }
+  function glide() {
+    var k = still ? 1 : 0.2;
+    rx += (x - rx) * k; ry += (y - ry) * k;
+    if (Math.abs(x - rx) + Math.abs(y - ry) < 0.3) { rx = x; ry = y; raf = 0; }
+    else raf = requestAnimationFrame(glide);
+    place(ring, rx, ry);
+  }
+  function hide() { on = false; root.classList.remove('cur-on', 'cur-down'); }
+
+  addEventListener('pointermove', function (e) {
+    if (e.pointerType !== 'mouse') { if (on) hide(); return; }
+    x = e.clientX; y = e.clientY;
+    if (!on) { on = true; rx = x; ry = y; place(ring, x, y); root.classList.add('cur-on'); }
+    place(dot, x, y); mode(e.target);
+    if (!raf) raf = requestAnimationFrame(glide);
+  }, { passive: true });
+  addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse') root.classList.add('cur-down'); else if (on) hide();
+  }, { passive: true });
+  addEventListener('pointerup', function () { root.classList.remove('cur-down'); }, { passive: true });
+  /* what is under the pointer changes when the page scrolls even if the mouse does not move */
+  addEventListener('scroll', function () { if (on) mode(document.elementFromPoint(x, y)); }, { passive: true, capture: true });
+  document.addEventListener('mouseout', function (e) { if (!e.relatedTarget) hide(); });
+  addEventListener('blur', hide);
+})();
+</script>
+</body>
+</html>
